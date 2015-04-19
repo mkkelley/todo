@@ -1,17 +1,28 @@
 %table
   %tr
-    %th
-    %th Name
+    %th Task
     %th Action
-  - @tasks.each do |task|
+  - @incomplete_tasks.each do |task|
     %tr
-      %td= '✓' if task.completed?
       %td= task.name
       %td
-        = button_tag 'Update', class: 'js-task-button', data: {task_id: task.id.to_s}
-        = button_to 'Delete', task_path(task), method: :delete
+        = button_tag 'Done!', class: 'js-task-button', data: {task_id: task.id.to_s}
+        = button_to 'Remove', task_path(task), method: :delete
 
 = form_for @task do |f|
   = f.text_field :name
   = f.submit
 
+%table
+  %tr
+    %th
+    %th Task
+    %th Action
+  - 10.times do |i|
+    - task = @complete_tasks[i]
+    - next if task.nil?
+    %tr
+      %td= '✓'
+      %td= task.name
+      %td
+        = button_tag 'Not Done', class: 'js-task-button', data: {task_id: task.id.to_s}

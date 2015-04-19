@@ -7,7 +7,9 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = Task.order(created_at: :desc)
+    tasks = Task.order(created_at: :desc)
+    @incomplete_tasks = tasks.where(completed: :false)
+    @complete_tasks = tasks.where(completed: :true)
     @task = Task.new
   end
 

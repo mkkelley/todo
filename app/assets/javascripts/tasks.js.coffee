@@ -15,6 +15,7 @@ update_task = (id, new_data) ->
 
 $(document).ready ->
   $('.js-task-button').click ->
+    # alert('test')
     id = $(this).data('task-id')
     $.get("/tasks/" + id,
       (data) ->
@@ -24,4 +25,12 @@ $(document).ready ->
           new_data = {completed: true}
         update_task(id, new_data)
     )
-
+  $('.js-task-check').change ->
+    alert('test')
+    id = $(this).data('task-id')
+    td = $(this).parent();
+    if this.checked
+      new_data = {completed: true}
+    else
+      new_data = {completed: false}
+    update_task(id, new_data)
